@@ -1,0 +1,22 @@
+
+
+.breadcrumb.clean {
+  background: none;
+  padding: 0 $grid-gutter-width/4;
+
+  li {
+    padding-right: 0.5em;
+  }
+  
+  .active {
+    color: $text-color;
+    
+    a {
+      @extend %normal-link;
+    }
+
+    i {
+      margin-right: .5em;
+    }
+  }
+}

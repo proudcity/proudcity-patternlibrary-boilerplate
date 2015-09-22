@@ -1,192 +1,210 @@
 'use strict';
 
-// Deal with local HTML5 Mode
-var modRewrite = require('connect-modrewrite');
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
-var filesRedirect = '!\\.html|\\.js|\\.svg|\\.woff|\\.ttf|\\.eot|\\.otf|\\.css|\\.png|\\.jpg$ /index.html [L]';
-
 module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
+  var globalConfig = {
+    theme_css: 'css',
+    theme_scss: 'scss',
+    theme_compass: false,
+    theme_dist: 'nested',
+    bowerPath: {
+      'bootSass': 'bower_components/bootstrap-sass-official/assets/stylesheets/',
+      'bootJs':   'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/',
+      'bourbon':  'bower_components/bourbon/dist/'
+    }
+  };
 
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
-		app: 'app',
-		dist: 'dist',
+  // Set up our sass files
+  var sassFiles = {},
+      fileNames = [
+        'ckeditor',
+        'custom',
+        'ie',
+      ];
 
-		sass: {
-			options: {
-				includePaths: [
-				  '<%= app %>/bower_components/bootstrap-sass-official/assets/stylesheets',
-          '<%= app %>/bower_components/bourbon/dist',
-          '<%= app %>/bower_components/proudcity-patterns/app/scss'
-				]
-			},
-			dist: {
-				options: {
-					outputStyle: 'extended'
-				},
-				files: {
-					'<%= app %>/css/app.css': '<%= app %>/scss/app.scss',
-					'<%= app %>/css/patternlibrary.css': '<%= app %>/scss/patternlibrary.scss',
-					'<%= app %>/css/proud-toolbar.css': '<%= app %>/scss/proud-toolbar.scss'
-				}
-			}
-		},
+  // compile sass file paths
+  for(var i = 0; i < fileNames.length; i++) {
+    sassFiles['<%= globalConfig.theme_css %>/' + fileNames[i] + '.css'] = 'sass/' + fileNames[i] + '.<%= globalConfig.theme_scss %>';
+  }
 
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc'
-			},
-			all: [
-				'Gruntfile.js',
-				'<%= app %>/js/**/*.js'
-			]
-		},
+  grunt.initConfig({
+    globalConfig: globalConfig,
+    pkg: grunt.file.readJSON('package.json'),
 
-		clean: {
-			dist: {
-				src: ['<%= dist %>/*']
-			},
-		},
-		copy: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd:'<%= app %>/',
-					src: ['CNAME', '.htaccess', 'favicon.ico', 'fonts/**', 'vendor/**', '**/*.html', '!**/*.scss', '!bower_components/**', 'images/**', 'vendor/**/*'],
-					dest: '<%= dist %>/'
-				} , {
-					expand: true,
-					flatten: true,
-					src: ['<%= app %>/bower_components/font-awesome/fonts/**'],
-					dest: '<%= dist %>/fonts/',
-					filter: 'isFile'
-				} ]
-			},
-		},
+    'node-inspector': {
+      dev: {}
+    },
 
-		//imagemin: {
-		//	target: {
-		//		files: [{
-		//			expand: true,
-		//			cwd: '<%= app %>/images/',
-		//			src: ['**/*.{jpg,gif,svg,jpeg,png}'],
-		//			dest: '<%= dist %>/images/'
-		//		}]
-		//	}
-		//},
+    // Lib-sass
+    sass: {
+      //options: {
+        //sourceMap: true
+      //},
+      dev: {
+        options: {
+          outputStyle: 'nested', // expanded or nested or compact or compressed
+          includePaths: [
+            'sass',
+            '<%= globalConfig.bowerPath.bootSass %>',
+            '<%= globalConfig.bowerPath.bourbon %>'
+          ],
+          imagePath: '../images/unminified'
+        },
+        files: sassFiles
+      },
+      dist: {
+        options: {
+          outputStyle: 'compressed', // expanded or nested or compact or compressed
+          includePaths: [
+            'sass',
+            '<%= globalConfig.bowerPath.bootSass %>',
+            '<%= globalConfig.bowerPath.bourbon %>'
+          ],
+          imagePath: '../images'
+        },
+        files: sassFiles
+      }
+    },
 
-		uglify: {
-			options: {
-				preserveComments: 'some',
-				mangle: false
-			}
-		},
+    watch: {
+      grunt: { files: ['Gruntfile.js'] },
 
-		useminPrepare: {
-			html: ['<%= app %>/index.html'],
-			options: {
-				dest: '<%= dist %>'
-			}
-		},
+      sass: {
+        files: ['sass/{,**/}*.s*ss'],
+        tasks: ['sass:dev']
+      },
+      js: {
+        files: [
+          'js/{,**/}*.js',
+          '!js/{,**/}*.min.js'
+        ],
+        tasks: [
+          'jshint',
+        ]
+      },
+      livereload: {
+        files: ['js/{,**/}*.js', '<%= globalConfig.theme_css %>/{,**/}*.css', 'images/{,**/}.{jpg,gif,svg,jpeg,png}'],
+        options: {
+          livereload: true
+        }
+      }
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      all: [
+        'js/{,**/}*.js',
+        '!js/{,**/}*.min.js',
+        '!js/{,**/}foundatio*.js',
+        '!js/behavior/{,**/}*.js',
+        '!js/foundation/{,**/}*.js',
+        '!js/vendor/{,**/}*.js'
+      ]
+    },
+    coffeelint: {
+      all: ['js/{,*/}*.coffee']
+    },
+    coffee: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'js',
+          src: '{,*/}*.coffee',
+          dest: 'js',
+          ext: '.js'
+        }]
+      }
+    },
+    imagemin: {
+      options: {                      
+        optimizationLevel: 3
+      },
+      dynamic: {                         
+        files: [{
+          expand: true,                  
+          cwd: 'images/unminified/',     
+          src: ['**/*.{jpg,gif,svg,jpeg,png}'],       
+          dest: 'images/'                
+        }]
+      }
+    },
+    uglify: {
+      bootstrap: {
+        options: {
+          preserveComments: 'some',
+          mangle: false
+        },
+        files: {
+          'js/custom-bootstrap.min.js' : [
+            '<%= globalConfig.bowerPath.bootJs %>transition.js',
+            '<%= globalConfig.bowerPath.bootJs %>modal.js',
+            '<%= globalConfig.bowerPath.bootJs %>affix.js',
+            '<%= globalConfig.bowerPath.bootJs %>alert.js',
+            '<%= globalConfig.bowerPath.bootJs %>button.js',
+            'js/bootstrap/carousel-compatibility.js',
+            '<%= globalConfig.bowerPath.bootJs %>collapse.js',
+            '<%= globalConfig.bowerPath.bootJs %>dropdown.js',
+            '<%= globalConfig.bowerPath.bootJs %>tooltip.js',
+            '<%= globalConfig.bowerPath.bootJs %>popover.js',
+            '<%= globalConfig.bowerPath.bootJs %>scrollspy.js',
+            '<%= globalConfig.bowerPath.bootJs %>tab.js'
+          ]
+        }
+      }
+    },
+    // concat: {
+    //   dist: {
+    //     options: {
+    //       // Pass in the new jquery val
+    //       process: function(src, filepath) {
+    //         if(filepath.indexOf('bootstrap') > 0) {
+    //           // Inject new jquery version
+    //           src = src.replace(/jQuery/g, 'jqboot');
+    //         }
+    //         return src;
+    //       },
+    //     },
+    //     files: {
+    //       'js/bootstrap-full.min.js': [
+    //         'bower_components/jquery/dist/jquery.min.js',
+    //         'js/no-conflict.js',
+    //         'js/custom-bootstrap.min.js',
+    //         'js/attach-no-conflict.js'
+    //       ],
+    //     },
+    //   },
+    // },
+            
+    stripmq: {
+      options: {
+        stripBase: true,
+        minWidth: 40,
+        maxWidth: 1280
+      },
+      files: {
+        src: [
+          'css/custom.css',
+        ],
+        dest: 'css/ie-mq.css'
+      },
+    }
+  });
 
-		usemin: {
-			html: ['<%= dist %>/**/*.html', '!<%= app %>/bower_components/**'],
-			css: ['<%= dist %>/css/**/*.css'],
-			options: {
-				dirs: ['<%= dist %>']
-			}
-		},
+  
+  grunt.registerTask('warn', "Notice", function() {
+    grunt.log.writeln("If you change any bootstrap javascript, please make sure to run \"grunt build\" to see changes.");
+  });
+  
 
-		watch: {
-			grunt: {
-				files: ['Gruntfile.js'],
-				tasks: ['sass']
-			},
-			sass: {
-				files: '<%= app %>/scss/**/*.scss',
-				tasks: ['sass']
-			},
-			livereload: {
-				files: ['<%= app %>/**/*.html', '!<%= app %>/bower_components/**', '<%= app %>/js/**/*.js', '<%= app %>/css/**/*.css', '<%= app %>/images/**/*.{jpg,gif,svg,jpeg,png}'],
-				options: {
-					livereload: 35727
-				}
-			}
-		},
+  // Runs sass, sets vars
+  grunt.registerTask('compile-sass', ['warn', 'sass:dist','stripmq', 'imagemin']);
 
-		connect: {
-			app: {
-				options: {
-					port: 9000,
-					base: '<%= app %>/',
-					open: true,
-					livereload: 35727,
-					hostname: 'localhost',
-					middleware:  function (connect) {
-            return [
-              modRewrite ([filesRedirect]),
-              mountFolder(connect, 'app')
-            ];        
-	        }
-				}
-			},
-			dist: {
-				options: {
-					port: 9001,
-					base: '<%= dist %>/',
-					open: true,
-					keepalive: true,
-					livereload: false,
-					hostname: 'localhost',
-					middleware:  function (connect) {
-            return [
-              modRewrite ([filesRedirect]),
-              mountFolder(connect, 'dist')
-            ];        
-	        }
-				}
-			}
-		},
+  // Run watch at default settings
+  grunt.registerTask('default', ['warn', 'sass:dev','stripmq','watch']);
 
-		ngtemplates:  {
-		  app:        {
-		    cwd:      '<%= dist %>',
-		    src:      'views/**/*.html',
-		    dest:     '<%= dist %>/views/app.templates.js',
-		    options:    {
-		      htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true }
-		    }
-		  }
-		},
-
-		wiredep: {
-			target: {
-				src: [
-					'<%= app %>/**/*.html'
-				],
-				exclude: [
-					'font-awesome',
-					'bootstrap-sass-official'
-				]
-			}
-		}
-
-	});
-
-	
-	grunt.registerTask('compile-sass', ['sass']);
-	grunt.registerTask('bower-install', ['wiredep']);
-	
-	grunt.registerTask('default', ['compile-sass', 'bower-install', 'connect:app', 'watch']);
-	grunt.registerTask('validate-js', ['jshint']);
-	//grunt.registerTask('validate-js', ['jshint', 'ngtemplates', 'concat']);
-	grunt.registerTask('server-dist', ['connect:dist']);
-	
-	grunt.registerTask('publish', ['compile-sass', 'clean:dist', 'useminPrepare', 'copy:dist',  'concat', 'cssmin', 'ngtemplates','uglify', 'usemin']);
-//'newer:imagemin',
-};
+  // Run watch with options
+  grunt.registerTask('build', ['compile-sass', 'uglify']);
+}

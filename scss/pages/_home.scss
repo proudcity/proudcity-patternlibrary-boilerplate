@@ -1,0 +1,30 @@
+
+// Home pg
+.home-features {
+  .fa {
+    width: 40px;
+    display: block;
+    float: left;
+    color: $brand-primary;
+  }
+}
+
+.home {
+  
+  .bg-color {
+    background-color: $gray-lighter;
+  }
+
+  .about {
+    margin-top: 0;
+  }
+
+  #banner .banner-welcome {
+    background: transparent;
+  }
+  
+  [ui-view] {
+    min-height: 0;
+  }
+
+}
