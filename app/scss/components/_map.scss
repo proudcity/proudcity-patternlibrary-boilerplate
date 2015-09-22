@@ -1,0 +1,265 @@
+
+%webkitscroll {
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 11px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 11px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  &::-webkit-scrollbar-track { 
+    background-color: #fff; 
+    border-radius: 8px; 
+  }
+}
+
+@mixin webkitscroll() {
+   @extend %webkitscroll;
+}
+
+@include keyframes(fadeIn) {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// If squish make map smaller on slider left
+@mixin slider-animations($left-slide, $details-width) {
+
+  // Viewing right panel
+  .details-open & {
+    left: -$left-slide;
+  }
+
+  .details {
+    width: $details-width;  
+    margin-right: -($details-width + 10);
+
+    .details-open & {
+      margin-right: -$left-slide;
+    }
+  }
+}
+
+// Map container styles
+// ---------------------
+
+#map-wrapper {
+  border-top: 2px solid $gray-lighter;
+  position: relative;
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 70%;
+
+  & > div,
+  .map-slider,
+  .details,
+  .map-pane,
+  #map {
+    position: absolute;
+    height: 100%;
+    top: 0;
+  }
+
+  & > div,
+  .map-slider,
+  .map-pane,
+  #map {
+    width: 100%;
+  }
+
+  .map-title{
+    z-index: 1000;
+    position: absolute;
+    left: 80px;
+  }
+
+}
+
+
+// Map styles 
+
+.overflow {
+  width: 100%;
+  left: 0;
+
+  
+  .map-pane {
+    right: 0;
+    overflow: hidden;
+
+    #map {
+      max-width: 100%;
+      position: relative;
+      @include transition(width ease 0.3s);
+    }
+  }
+
+  .menu-ui {
+    background:#fff;
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:1;
+    border-radius:3px;
+    width:120px;
+    border:1px solid rgba(0,0,0,0.4);
+    }
+    .menu-ui a {
+      color:#404040;
+      display:block;
+      margin:0;
+      padding:0;
+      padding:10px;
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,0.25);
+      text-align:center;
+      }
+      .menu-ui a:first-child {
+        border-radius:3px 3px 0 0;
+        }
+      .menu-ui a:last-child {
+        border:none;
+        border-radius:0 0 3px 3px;
+        }
+      .menu-ui a:hover {
+        background: $gray-lighter;
+        }
+      .menu-ui a.active {
+        background: $brand-primary;
+        color:#FFF;
+        }
+        .menu-ui a.active:hover {
+          background:#3074a4;
+          }
+
+  #details-close {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 1.2em;
+  }
+
+  .details {
+    background: #fff;
+    box-shadow: -1px 0px 13px 6px rgba(#000, .2);
+    padding: 30px;
+    right: 0;
+    z-index: 2005;
+
+    & > div {
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-height: 100%;
+      max-height: 100%;
+      @include webkitscroll();
+    }
+  }
+}
+
+
+.google-powered-by {
+  color: $gray-light;
+  font-size: 12px;
+}
+
+.hours-wrapper {
+  margin: 1em 0 .5em;
+}
+
+
+// Animations base
+
+$left-slide: 10%;
+$details-width: 100%;
+
+.overflow.map-slider {
+  @include transition(left ease-out 0.4s);
+
+  .map-pane {
+    width: 100%!important;
+  }
+
+  .details {
+    @include transition(margin-right ease 0.3s);
+  }
+
+  @include slider-animations($left-slide, $details-width);
+}
+
+// Phone
+
+@include respond($xs-only) {
+}
+
+// Phone portrait
+
+@media #{$xs-only} and (orientation: landscape) {
+  #map-wrapper {
+    padding-top: 45%;
+  }
+}
+
+// Tablet landscape
+
+@media #{$xs-only} and (orientation: landscape) {
+  #map-wrapper {
+    padding-top: 50%;
+  }
+}
+
+// Tablet portrait
+
+@media #{$sm-only} and (orientation: portrait) {
+  #map-wrapper {
+    padding-top: 110%;
+  }
+}
+
+// Mobile + tablet
+
+@include respond($sm-and-down) {
+}
+
+// tablet only
+@include respond($sm-only) {
+}
+
+// Tablet up
+$left-slide: 100px;
+$details-width: 350px;
+@include respond($sm-up) {
+  .overflow.map-slider {
+    @include slider-animations($left-slide, $details-width);
+  }
+}
+
+@include respond($md-up) {
+}
+
+@include respond($lg-up) {
+  #map-wrapper {
+    padding-top: 45%;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  #map-wrapper {
+    padding-top: 45%;
+  }
+}

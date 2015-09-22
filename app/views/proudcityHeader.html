@@ -1,0 +1,34 @@
+<header id="header" class="header" role="header">
+  <div class="">
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+
+        <ul id="logo-menu" class="nav navbar-nav">
+          <li>
+            <a href="/" title="Home" rel="home" id="logo" style="padding:6px;">
+              <img class="logo" src="/images/logo.png" alt="Home" style="height: 38px;">
+            </a>
+          </li>
+          <li><a class="navbar-brand" href="/"><strong>Proud</strong>City</a></li>
+        </ul>
+
+      </div> <!-- /.navbar-header -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul id="main-menu" class="menu nav navbar-nav pull-right">
+        	<li ng-repeat="item in mainMenu" ui-sref-active="active"><a ui-sref="{{item.state}}">{{item.title}}</a></li>
+          <li><a class="btn btn-primary btn-get-started btn-sm" ui-sref="start">Get started</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /.navbar -->
+  </div> <!-- /.container -->
+</header>

@@ -1,0 +1,64 @@
+/*
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('../fonts/cooperhewitt/CooperHewitt-Medium.woff') format('woff2'),
+       url('../fonts/cooperhewitt/CooperHewitt-Medium.woff') format('woff'),
+       url('../fonts/cooperhewitt/CooperHewitt-Medium.ttf') format('truetype');
+}
+*/
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('../fonts/cooperhewitt/CooperHewitt-Bold.woff') format('woff2'),
+       url('../fonts/cooperhewitt/CooperHewitt-Bold.woff') format('woff'),
+       url('../fonts/cooperhewitt/CooperHewitt-Bold.ttf') format('truetype');
+  //font-weight: bold;
+}
+
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
+@import url("http://fonts.googleapis.com/css?family=Lato:400,900,700,300");
+
+html {
+  font-size: $font-size-base;
+}
+
+// Modify margins
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  &.margin-none {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  &.margin-top-none {
+    margin-top: 0;
+  }
+  &.margin-bottom-none {
+    margin-bottom: 0;
+  }
+  &.margin-bottom-large {
+    margin-bottom: $line-height-computed * 1.5;
+  }
+  &.margin-bottom-larger {
+    margin-bottom: $line-height-computed * 2;
+  }
+  &.margin-bottom-huge {
+    margin-bottom: $line-height-computed * 3;
+  }
+}
+
+
+@include respond($xs-only) {
+
+  $type-mod: .75;
+  h1 {
+    font-size: $font-size-h1 * $type-mod;
+  }
+  h2 {
+    font-size: $font-size-h2 * $type-mod;
+  }
+  h3 {
+    font-size: $font-size-h3 * $type-mod;
+  }
+  h4 {
+    font-size: $font-size-h4 * $type-mod;
+  }
+}

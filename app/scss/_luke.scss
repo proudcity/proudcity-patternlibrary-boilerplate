@@ -1,0 +1,194 @@
+/* ADD luke css */
+
+body, h1, h2, h3, h4, h5, h6 {
+	//color: #424242;
+}
+h1 {
+	font-weight: 700;
+}
+h2 {
+	padding-bottom: 20px;
+}
+h3 {
+	font-size: 120%;
+}
+form {
+	margin-bottom: 20px;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #fff;
+}
+#banner.banner-marketing {
+	//background: $white; //#0071bc url('/images/rays.png') 50% 80%;
+	//color: #fff;
+}
+#banner a {
+	//color: #fff;
+}
+#banner .banner-welcome {
+	margin: 0;
+}
+#banner .banner-welcome input {
+	font-weight: 400;
+}
+#banner .banner-welcome input.form-control {
+	width: 80%;
+}
+#banner .banner-welcome input {
+	border-radius: 5px;
+	font-size: 130%;
+}
+#banner label {
+	color: #fff;
+	display: block;
+	font-size: 150%;
+	font-weight: 300;
+}
+.number {
+  background: #000;
+  color: #fff;
+  font-size: 300%;
+  font-weight: 800; }
+.home-features p {
+	padding-bottom: 20px;
+}
+.home-features .fa {
+	color: #0071bc !important;
+}
+.about {
+  background: #000;
+  color: #fff;
+  margin-top: 40px;
+  padding-bottom: 50px;
+  padding-top: 50px; }
+
+.about h2, .about h3 {
+  color: #fff;
+}
+.about p, .about li {
+	font-size: 125%;
+}
+.about h3 {
+	font-size: 150%;
+}
+.steps h3 {
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.btn-primary {
+	//background-color: transparent;
+	//border-color: #ffffff;
+}
+#footer {
+	//background-color: $gray-lighter;
+}
+#footer .menu {
+	//text-transform: normal;
+}
+#footer a:not(.btn) {
+	//color: #757575;
+}
+
+
+
+
+
+/* luke new */
+
+body {
+  font-size: 16px;
+}
+body:not(.scrolled) #header .navbar {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+body > main {
+  //border-top: 92px solid #fff;
+}
+a, footer a:hover {
+  color: #2196F3;
+}
+.navbar-inverse {
+  //background: #000;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form, .navbar-inverse {
+  //border-color: #000;
+}
+.navbar-nav > li {
+  font-size: 14px;
+}
+
+.btn-primary {
+  //background-color: #2196F3;
+  //border-color: #2196F3;
+  //color: #fff;
+}
+.home .bg-color {
+  background: #fff;
+}
+.home .steps .number {
+  background: #000;
+  color: #fff;
+}
+footer {
+  background: #fff;
+  color: #999;
+}
+footer ul, footer li {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+footer a, footer h3, footer {
+  color: #777;
+}
+footer .connect .fa {
+  font-size: 25px;
+  margin-right: 15px;
+}
+
+body {
+  font-size: 16px;
+}
+body:not(.scrolled) #header .navbar {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+body > main {
+  //border-top: 92px solid #fff;
+}
+a, footer a:hover {
+  color: #2196F3;
+}
+
+.navbar-nav > li {
+  font-size: 14px;
+}
+.btn-primary {
+  background-color: #2196F3;
+  border-color: #2196F3;
+  color: #fff;
+}
+.home .bg-color {
+  background: #fff;
+}
+.home .steps .number {
+  background: #000;
+  color: #fff;
+}
+footer {
+  background: #fff;
+  color: #999;
+}
+footer ul, footer li {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+footer a, footer h3, footer {
+  color: #777;
+}
+footer .connect .fa {
+  font-size: 30px;
+  margin-right: 10px;
+}

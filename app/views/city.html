@@ -1,0 +1,305 @@
+
+<header id="header" class="header" role="header">
+  <div class="">
+    <nav class="navbar navbar-default navbar-city" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+
+        <ul id="logo-menu" class="nav navbar-nav">
+          <li>
+            <a href="/" title="Home" rel="home" id="logo">
+              <!--<img class="logo" src="http://slc.helmcivic.com/sites/slc.helmcivic.com/files/logo-opac.png" alt="Home">-->
+              <i class="fa fa-circle-o-notch fa-2x fa-inverse"></i>
+            </a>
+          </li>
+          <li><a class="navbar-brand" href="/"><strong>{{location.city}}</strong> <sup>DEMO</sup></a></li>
+          <!--<li><a class="btn btn-primary btn-get-started" ng-click="modal();">Get started</a></li>-->
+        </ul>
+
+      </div> <!-- /.navbar-header -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul id="main-menu" class="menu nav navbar-nav pull-right">
+        <li class="first leaf menu-link-agencies"><a href="" ng-click="modal()">Agencies</a></li>
+        <li class="leaf menu-link-answers"><a href="" ng-click="modal()">Answers</a></li>
+        <li class="leaf menu-link-events"><a href="" ng-click="modal()">Events</a></li>
+        <li class="leaf menu-link-news"><a href="" ng-click="modal()">News</a></li>
+        <li class="leaf menu-link-documents"><a  href="" ng-click="modal()">Documents</a></li>
+        <li class="last leaf menu-link-connect"><a href="" ng-click="modal()">Connect</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /.navbar -->
+  </div> <!-- /.container -->
+</header>
+
+<div class="full-container">
+  <div id="banner" class="city-banner full" style="background-image:url({{settings.header.backgroundImage}});background-color:{{settings.header.backgroundColor}};"><div>
+    <div proudcity-image></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-8 col-sm-8"><div class="banner-wrap banner-wrap-city blue-back">
+          <h3>Proudly serving</h3>
+          <h1>{{location.city}}</h1>
+          <form class="form-inline get-started search-form align-{{settings.header.searchAlign}}" id="wrapper-search" ng-class="{'search-active': searchActive}">
+            <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete>
+            <div class="input-group">
+              <input id="search-input" class="form-control input-lg" type="text" placeholder="How may we help you?" ng-focus="searchFocus()" ng-keypress="searchAutocomplete()" />
+              <span class="input-group-btn">
+                <button type="submit" value="Go" class="btn btn-primary btn-lg" ng-click="modal();"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+            <ul class="search-autosuggest" ng-if="searchActive">
+              <li class="" ng-repeat="item in autocomplete"><a href="" ng-click="searchAutocompleteClick(item)">
+                <i class="fa fa-{{item.icon}}"></i>
+                {{item.title}}
+              </a></li>
+            </ul>
+          </form>
+          
+        </div></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="container spacing">
+  <div class="app-wrap">
+    <div ng-if="appPageDisplay == 'all'" class="open-nav">
+      <a menu-click="return-false"><i class="fa fa-arrow-circle-o-left"></i> <span>Navigation</span></a>
+    </div>
+    <div class="action-box" id="wrapper-311">
+      <div class="row">
+        <div ng-if="appPageDisplay == 'all'" class="col-sm-12 nav-contain">
+          <div menu></div>
+        </div>
+        <div class="col-sm-12 content-contain">
+          <div class="body-content animation-wrap">
+            <main id="main-311" class="main main-311 transform clearfix" ui-view></main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container spacing"><div class="row">
+
+  <div class="col-md-7 col-sm-12 city-news">
+    <h2>News</h2>
+    <div class="view-content">
+    <div class="views-row views-row-1 views-row-odd views-row-first list-row">
+        
+    <div class="views-field views-field-title">        <div class="field-content">May 6 2015</div><h5 class="field-content"><a href="" ng-click="modal()">Community Wide Cleanup Sets New Volunteer Record</a></h5>  </div>  
+    <div class="views-field views-field-created">          </div>  </div>
+    <div class="views-row views-row-2 views-row-even list-row">
+        
+    <div class="views-field views-field-title">        <div class="field-content">May 6 2015</div><h5 class="field-content"><a href="" ng-click="modal()">Mayor and Metro Council to Evaluate Home Buyout Program</a></h5>  </div>  
+    <div class="views-field views-field-created">          </div>  </div>
+    <div class="views-row views-row-3 views-row-odd list-row">
+        
+    <div class="views-field views-field-title">        <div class="field-content">May 6 2015</div><h5 class="field-content"><a href="" ng-click="modal()">Free Workshop Helps Citizens Build or Repair Credit History</a></h5>  </div>  
+    <div class="views-field views-field-created">          </div>  </div>
+    <div class="views-row views-row-4 views-row-even views-row-last list-row">
+        
+    <div class="views-field views-field-title">        <div class="field-content">May 6 2015</div><h5 class="field-content"><a href="" ng-click="modal()">{{location.city}} Anticipates Bright Economic Future</a></h5>  </div>  
+    <div class="views-field views-field-created">          </div>  </div>
+      </div>
+  </div>
+
+  <div class="col-md-5 col-sm-12">
+    <h2>Events</h2>
+    <a href="" ng-click="modal()"><img src="/images/calendar.png" /></a>
+  </div>
+
+</div></div>
+
+
+
+
+<div class="container">
+
+<div class="card-deck-wrapper spacing"><div class="card-deck">
+
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-university fa-3x"></i>
+    <h3>Mayor</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-users fa-3x"></i>
+    <h3>City Council</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-shield fa-3x"></i>
+    <h3>Police</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-fire fa-3x"></i>
+    <h3>Fire</h3>
+  </a>
+
+</div></div>
+<div class="card-deck-wrapper spacing"><div class="card-deck">
+
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-pagelines fa-3x"></i>
+    <h3>Parks and Rec</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-tint fa-3x"></i>
+    <h3>Public Works</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-medkit fa-3x"></i>
+    <h3>Health</h3>
+  </a>
+  <a href="" ng-click="modal()" class="card card-block text-center card-btn">
+    <i class="fa fa-usd fa-3x"></i>
+    <h3>Finance</h3>
+  </a>
+
+</div></div>
+
+</div> <!-- card deck row -->
+
+
+
+<div class="container spacing social">
+  <div in-view="socialCompile || showSocial($event, $inview, $inviewpart)" 
+       compile="socialCompile"></div>
+</div>
+
+
+<div in-view="mapCompile || showMap($event, $inview, $inviewpart)" 
+     compile="mapCompile"></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <i class="fa fa-circle-o-notch fa-5x fa-inverse"></i>
+        <h2 class="margin-top-none"><small>Proudly serving</small> <div class="ng-binding">{{location.city}}</div></h2>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3>Sections</h3>
+        <ul id="footer-menu" class="menu">
+          <li><a href="" ng-click="modal()">Agencies</a></li>
+          <li><a href="" ng-click="modal()">Events</a></li>
+          <li><a href="" ng-click="modal()">News</a></li>
+          <li><a href="" ng-click="modal()">Documents</a></li>
+          <li><a href="" ng-click="modal()">Connect</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3>Actions</h3>
+        <ul>
+          <li><a href="" ng-click="modal()"><!--<i class="fa fa-question-circle"></i>--> Get Answers</a></li>
+          <li><a href="" ng-click="modal()"><!--<i class="fa fa-usd"></i>--> Make a Payment</a></li>
+          <li><a href="" ng-click="modal()"><!--<i class="fa fa-exclamation-triangle"></i>--> Report an Issue</a></li>
+          <li><a href="" ng-click="modal()"><!--<i class="fa fa-wrench"></i>--> Check Status</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+1231231234">(123) 123-1234</a></li>
+          <li><a href="mailto:example@getproudcity.com">example@getproudcity.com</a></li>
+        </ul>
+        <a href="" ng-click="modal()"><i class="fa fa-twitter"></i></a> 
+        <a href="" ng-click="modal()"><i class="fa fa-facebook"></i></a> 
+        <a href="" ng-click="modal()"><i class="fa fa-linkedin"></i></a> 
+        <a href="" ng-click="modal()"><i class="fa fa-github"></i></a> 
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+<div class="show-form" in-view="formShown = formShown || toggleForm()"></div>
+
+<div class="contact-hide">
+  <div class="container">
+    <div class="row"><div class="col-md-8 col-md-push-2">
+      <div class="well"><div><div class="container-fluid">
+        <div class="close-window"><a href="#" ng-click="toggleModal(null, $event)"><i class="fa fa-times"></i></a></div>
+        <div ng-if="activeModal=='signup'">
+         
+          <div proudcity-signup></div>
+        </div>
+        <div ng-if="activeModal=='getInvolved'">
+          <div proudcity-get-involved></div>
+        </div>
+      </div></div></div>
+    </div></div>
+  </div>
+</div>
+
+
+<div id="banner-bottom" class="navbar navbar-proud">
+  <ul class="menu nav navbar-nav">
+    <li>
+      <a href="/" title="Home" rel="home" id="logo" style="padding:6px;">
+        <img class="logo pull-right" src="/images/logo.png" alt="Home" style="height: 38px;">
+      </a>
+    </li>
+    <li class="leaf menu-link-content"><a href="" ui-sref="features"><i class="fa fa-check"></i> Features</a></li>
+    <li class="leaf menu-link-content"><a href="" ui-sref="features"><i class="fa fa-usd"></i> Pricing</a></li>
+    <li class="leaf menu-link-content"><a href="" ui-sref="start"><i class="fa fa-search"></i> Search</a></li>
+    <li class="leaf menu-link-content"><a href="" ng-click="customizeClick()"><i class="fa fa-paint-brush"></i> Customize</a></li>
+    <li class="leaf menu-link-content"><a href="" ng-click="modal()"><i class="fa fa-share-alt"></i> Share</a></li>
+    <li class="leaf menu-link-content"><a href="" ui-sref="contact"><i class="fa fa-comment"></i> Chat</a></li>
+    <li class="leaf menu-link-content proud-menu-tab"><a href="" ui-sref="contact"><i class="fa fa-play-circle"></i> Claim demo</li>
+  </ul>
+</div>
+
+
+<div id="search-bg" ng-if="searchActive" ng-click="searchClose()">
+  <a href="" ng-click="searchClose()" class="search-close" ng-if="searchActive"><i class="fa fa-times fa-3x"></i></a>
+</div>
+
+
+
+<style type="text/css">
+.navbar-default,
+.nav-contain .nav-pills li a,
+.agency-icon {
+  background-color: {{settings.color.main}} !important;
+}
+
+.navbar.navbar-default {
+  border-color: {{settings.color.main}} !important;
+}
+
+.banner-wrap.blue-back:before,
+.section-city .customize {
+  background-color: {{settings.color.secondary}} !important;
+}
+
+.nav-contain .nav-pills li.active a,
+#banner .get-started .btn,
+#map-wrapper .menu-ui a.active,
+.agency-icon:hover {
+  background-color: {{settings.color.highlight}} !important;
+}
+
+#banner .get-started .btn {
+  border-color: {{settings.color.highlight}} !important;
+}
+
+a{
+  color: {{settings.color.highlight}};
+}
+
+#banner.city-banner h3,
+#banner.city-banner h1,
+.section-city .customize {
+  color: {{settings.header.searchColor}} !important;
+}
+</style>

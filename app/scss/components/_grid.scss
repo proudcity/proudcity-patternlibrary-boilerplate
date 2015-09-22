@@ -1,0 +1,30 @@
+
+// Go full width
+.container {
+  max-width: 100%;
+}
+// .row {
+//   max-width: 100%;
+// }
+
+@include respond($sm-up) {
+  .switch-sm > div:first-child {
+    float: right;
+  }
+} 
+
+@include respond($md-up) {
+  .switch-md > div:first-child {
+    float: right;
+  }
+
+  .col-md-6:nth-child(2n + 1){
+    clear: left;
+  }
+} 
+
+@include respond($lg-up) {
+  .switch-lg > div:first-child {
+    float: right;
+  }
+} 

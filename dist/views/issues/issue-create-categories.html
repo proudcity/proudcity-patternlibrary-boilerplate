@@ -1,0 +1,21 @@
+<div class="slide-left-2">
+  <ol class="breadcrumb clean"><li class="active"><i class="fa fa-th"></i> Select category</li></ol>
+  <ul class="angular-311-2col">
+    <li ng-repeat="item in types | orderBy: 'title'" class="col-sm-6 col-md-4">
+      <div class="row category">
+        <div class="col-xs-2 col-md-2">
+          <h4 ng-if="item.field_icon"><a href="" ui-sref="{{typeUrl(item.url)}}" style="color: {{item.field_icon.color}}" class="fa fa-{{item.field_icon.icon}}"></a></h4>
+        </div>
+        <div class="col-xs-10 col-md-10 top-category">
+          <h4><a main-toggle="slide-left" href="" ui-sref="{{typeUrl(item.url)}}">{{item.title}}</a></h4>
+        </div>
+
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<div class="animation-wrap slide-left-2">
+  <div id="main-311-1" class="main main-311 transform clearfix quickfade" ui-view></div>
+</div>

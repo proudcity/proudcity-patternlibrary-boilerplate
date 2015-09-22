@@ -1,0 +1,49 @@
+
+// Fake browser header
+
+.browser-header {
+
+  &:before {
+    background: url(../images/browser-top.png) center top no-repeat;
+    background-size: 100%;
+    content: "";
+    display: block;
+    padding-top: 5.5%;
+    width: 100%;
+  }
+
+  img {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #D8D8D8;
+
+    &.no-padding {
+      padding: 0;
+    }
+  }
+}
+
+// Computer background
+
+.computer-bg {
+  background: url(../images/computer.png) center no-repeat;
+  background-size: 100% 100%;
+  height: 0;
+  padding: 54% 0 0 0;
+  position: relative;
+
+  .computer-inner {
+    position: absolute;
+    top: 4.5%;
+    left: 10.5%;
+    right: 10.5%;
+    height: auto;
+
+    video{
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      overflow: hidden
+    }
+  }
+}
